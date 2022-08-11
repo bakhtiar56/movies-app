@@ -4,7 +4,7 @@ import MovieCard from "./MovieCard";
 import SearchIcon from "./search.svg";
 import "./App.css";
 
-const API_URL = "http://www.omdbapi.com?apikey=b6003d8a";
+const API_URL = `https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_API_KEY}`;
 
 
 const App = () => {
@@ -17,10 +17,11 @@ const App = () => {
   }, []);
 
   const searchMovies = async (title) => {
-    const response = await fetch(`${API_URL}&s=${title}`);
+    const response = await fetch(`${API_URL}&query=${title}`);
     const data = await response.json();
+    console.log(data.results)
 
-    setMovies(data.Search);
+    setMovies(data.results);
   };
 
   return (
